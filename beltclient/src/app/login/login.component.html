@@ -1,0 +1,16 @@
+
+<h2>Please to be Logging In </h2>
+
+<form (submit)="onSubmit($event)">
+<p> Your Name: <input
+	type="text"
+	name="name"
+	required
+	minlength="2"	
+	[(ngModel)]="user.name"
+	#name="ngModel"
+	>
+	<span *ngIf="name.errors">Name of at least 2 characters is being mandatory</span>
+</p>
+<p><input type="submit" value="Login"></p>	
+</form>	

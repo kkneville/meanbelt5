@@ -1,0 +1,28 @@
+<h1>{{ currentUser.name }} ended the bidding!</h1>
+
+Highest Bidders:
+
+<table>
+	<thead>
+		<tr>
+			<th> Auction Item </th>
+			<th> Bid Amount </th>
+			<th> Bidder </th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let item of items">
+			<td> {{ item.name }} </td>
+			<td> {{ item.highest_bidder }} </td>
+			<td> {{ item.highest_bid }} </td>
+		</tr>
+	</tbody>				
+</table>
+
+
+<form (submit)="onSubmit($event)">
+	<input type="submit" value="Restart Bidding">
+</form>
+
+	
+

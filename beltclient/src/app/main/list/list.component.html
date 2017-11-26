@@ -1,0 +1,54 @@
+
+<h2> Silent Auction </h2>
+<h4><span style="font-style: italic;"> Bid for a cause! </span></h4>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>Auction Item</th>
+			<th>Current Bids</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let item of items">
+			<td>{{ item.name }}</td>
+			<td><ul><li *ngFor="let bid of item._bids">${{ bid.amt }} by {{ bid.bidder}} </li></ul></td>
+		</tr>	
+	</tbody>	
+</table>
+
+
+<h2> Make Your Bid</h2>
+
+<form (submit)="onSubmit($event)">
+
+					<select
+						name="item_id" 
+						[(ngModel)]="bid.item_id"
+						#item_id="ngModel"
+						>
+
+						<option *ngFor="let item of items" value={{item._id}}>{{ item.name }}</option>
+
+					</select>	
+
+					<input 
+						type="integer" 
+						name="amt" 
+						required
+
+						[(ngModel)]="bid.amt"
+						#amt="ngModel"
+
+					/>
+
+					<span *ngIf="amt.errors">Amount is required, must be higher than previous bids.</span>
+
+					<input type="submit" value="Bid" />
+				
+</form>
+
+
+<p><a [routerLink]="['../show']"><button>End the Bidding</button></a></p>
+
