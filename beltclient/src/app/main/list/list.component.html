@@ -21,6 +21,8 @@
 
 <h2> Make Your Bid</h2>
 
+<p class="alert" *ngIf="alert">{{ alert }}</p>
+
 <form (submit)="onSubmit($event)">
 
 					<select
@@ -50,5 +52,5 @@
 </form>
 
 
-<p><a [routerLink]="['../show']"><button>End the Bidding</button></a></p>
+<p *ngIf="currentUser.level == 2"><button (click)="updateStatus($event)">End the Bidding</button></p>
 

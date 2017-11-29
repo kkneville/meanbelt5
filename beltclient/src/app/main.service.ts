@@ -26,6 +26,23 @@ currentUser(callback){
     )
 }
 
+
+getStatus(callback){
+  return this._http.get('/status')
+    .subscribe(
+      (response) => {
+        console.log(response.json())
+        if (response.json().error){
+          console.log('no status error')
+          callback(response.json())
+        }
+        else {
+          callback(response.json())
+        }
+      }
+    )
+}
+
   items = []
 
   addUser(user, callback){
@@ -84,6 +101,24 @@ currentUser(callback){
       }
     )
   }
+
+
+
+  updateStatus(callback){
+  return this._http.get('/update')
+    .subscribe(
+      (response) => {
+        if (response.json().error){
+          console.log('no status error')
+          callback(response.json())
+        }
+        else {
+          console.log(response.json().status)
+          callback(response.json())
+        }
+      }
+    )
+}
 
   restart(callback){
     return this._http.get('/restart')

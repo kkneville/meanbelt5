@@ -48,7 +48,7 @@ export class ListComponent implements OnInit {
     })
   };
 
-
+alert = ""
 
 onSubmit(event){
   console.log(this.bid)
@@ -56,15 +56,42 @@ onSubmit(event){
     (response) => {
       if (response) {
           console.log(response)
+          if (response.reject) {
+            this.alert = response.reject
+            this.bid = new Bid()
+            console.log(this.bid)
+            this.ngOnInit()
+            return
+          }
+          this.alert = ""
           this.ngOnInit()
         }
-        else {
+      else {
           console.log("no response")
-        }
-    })
+      }  
+    }
+  )
 }
 
-
+updateStatus(event){
+  console.log("ending bidding")
+  this._MainService.updateStatus(
+    (res) => {
+      console.log(res)
+      if (res.error) {
+        console.log(res.error)
+        return
+      }
+      if (res.status) {
+          this._route.navigateByUrl("/main/show")
+          return
+      }
+      else {
+        console.log("status false")
+      }
+    }
+  )
+}
 
 
 }

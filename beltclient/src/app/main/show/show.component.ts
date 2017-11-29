@@ -22,6 +22,33 @@ constructor(
   ) { }
 
 ngOnInit() {
+    this._MainService.currentUser(
+      (user) => {
+        if (user) {
+           this.currentUser = user
+        }
+        else {
+          console.log("no user")
+        }
+      }
+    ),
+
+    this._MainService.getStatus(
+      (res) => {
+        if (res.status) {
+          if (res.status == false) {
+            this._route.navigateByUrl('/list')
+            return
+          }
+        }
+        else {
+          console.log("error getting status")
+        }
+      }
+    ),
+
+
+
   	this._MainService.getItems(
       (items) => {
         if (items) {
@@ -31,18 +58,8 @@ ngOnInit() {
         else {
           console.log("no items")
         }
-    }),
-
-  	this._MainService.currentUser(
-      (user) => {
-        if (user) {
-           this.currentUser = user
-           // this.populate()
-        }
-        else {
-          console.log("no user")
-        }
-    })
+      }
+    )
   };
 
 

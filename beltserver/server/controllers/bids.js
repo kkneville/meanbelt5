@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var User = require('../models/user');
 var Item = require('../models/item');
 var Bid = require('../models/bid');
+var Result = require('../models/result')
 var session = require('express-session');
 
 
@@ -45,6 +46,10 @@ module.exports = {
 						item.highest_bid = bid.amt
 						item.highest_bidder = user.name
 					}
+					else {
+						console.log("bid is too low")
+						return res.json({reject: "Bid must be higher than current highest bidder."})
+					}
 					item.save(function(err){
 						if (err){
 							console.log('error saving item')
@@ -58,6 +63,43 @@ module.exports = {
 		})
 	},
 
+
+	status: function(req, res){
+		console.log("Arrived at bids/status")
+		Result.findOne({}, function(err, result){
+			if (err){
+				console.log("error finding result")
+				return res.json({error:err.errors})
+			}
+			console.log(result)
+			return res.json({status:result.status})
+		})
+	},
+
+	update: function(req, res){
+		console.log("Arrived at bids/update")
+		Result.findOne({}, function(err, result){
+			if (err){
+				console.log("error finding result")
+				return res.json({error:err.errors})
+			}
+			if (result.status == false){
+				result.status = true
+				result.save(function(err){
+						if (err){
+							console.log('error saving result')
+							return res.json({error: err.errors})
+						}
+						console.log("result updated and saved")	
+						return res.json({status:result.status})
+				})
+			}	
+			else {
+				console.log("error with status, already set to true")
+				return res.json({error:"error with status update"})
+			}			
+		})
+	},
 
 	delete: function(req, res){
 		console.log("Arrived at bids/delete")	
@@ -85,6 +127,20 @@ module.exports = {
 						console.log("item saved")
 					})
 				}
+				Result.findOne({}, function(err, result){
+					if (err){
+						console.log('error finding result at delete')
+						return res.json({error: err.errors})
+					}
+					result.status = false
+					result.save(function(err){
+						if (err){
+							console.log('error updating result at delete')
+							return res.json({error: err.errors})
+						}
+						console.log("result set to false")
+					})
+				})
 				return res.json({status:"success"})		
 			})
 		})

@@ -23,12 +23,22 @@ export class MainComponent implements OnInit {
         if (user) {
            this.currentUser = user
            console.log("user is: ", this.currentUser)
+           this._MainService.getStatus(
+             (res) => {
+                if (res.status) {
+                      this._route.navigateByUrl('/main/show')
+                      return
+                }
+                this._route.navigateByUrl('/main/list')
+                return
+              }
+            )
         }
         else {
           this._route.navigateByUrl('/login')
         }
-    })
-
+      }
+    )
   }
 
   logout() {

@@ -1,13 +1,12 @@
-<h1>{{ currentUser.name }} ended the bidding!</h1>
+<h1>The Bidding Has Ended!</h1>
 
-Highest Bidders:
 
 <table>
 	<thead>
 		<tr>
 			<th> Auction Item </th>
+			<th> Highest Bidder  </th>
 			<th> Bid Amount </th>
-			<th> Bidder </th>
 		</tr>
 	</thead>
 	<tbody>
@@ -20,7 +19,7 @@ Highest Bidders:
 </table>
 
 
-<form (submit)="onSubmit($event)">
+<form *ngIf="currentUser.level == 2" (submit)="onSubmit($event)">
 	<input type="submit" value="Restart Bidding">
 </form>
 

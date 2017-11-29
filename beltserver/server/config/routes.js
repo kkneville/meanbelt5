@@ -23,6 +23,10 @@ module.exports = (app, req, res) => {
 
 	app.post('/create', bids.create);
 
+	app.get('/status', bids.status);
+
+	app.get('/update', bids.update);
+
 	app.get('/restart', bids.delete);
 
 
