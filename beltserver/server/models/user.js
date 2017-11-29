@@ -8,6 +8,12 @@ var UserSchema = new mongoose.Schema({
 		minlength: 2
 	},
 
+	level: {
+		type: Boolean,
+		default: 1
+	},
+
+	
 	_bids: [{
 		type: mongoose.Schema.Types.ObjectId, ref: "Bid"
 	}],
