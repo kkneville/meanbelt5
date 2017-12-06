@@ -1,6 +1,35 @@
 
-<h2> Silent Auction </h2>
-<h4><span style="font-style: italic;"> Bid for a cause! </span></h4>
+
+<div *ngFor="let group of groups; let a = index">
+
+	<div class="row text-center">
+
+			  <div *ngFor="let one of groups[a]; let i = index" class="col-sm-4">
+			    <div class="thumbnail">
+			      <img src="../../../assets/img/spa.jpg" alt="Paris">
+			      <p><strong>{{ one.name }}</strong></p>
+			      <p>More Info</p>
+			      <p><strong>Current Bids</strong></p>
+			      <p *ngFor="let bid of one._bids">${{ bid.amt }} by {{ bid.bidder }} </p>
+			      <button class="activate" (click)="activate()">Bid</button>
+			      	<div>
+				      <form class="form" (submit)="onBid($event)">
+				      	<input 
+							type="integer" 
+							name="amt" 
+							required
+
+							[(ngModel)]="bid.amt"
+							#amt="ngModel"
+						/>
+						<input type="submit" value="Submit" />
+				      </form>
+				    </div>  	
+			    </div>
+			  </div>
+	</div>
+</div>	
+
 
 
 <table>
