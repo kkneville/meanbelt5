@@ -12,7 +12,7 @@
 			      <p><strong>Current Bids</strong></p>
 			      <p *ngFor="let bid of one._bids">${{ bid.amt }} by {{ bid.bidder }} </p>
 			      <button class="activate" (click)="activate()">Bid</button>
-			      	<div>
+			      	<!-- <div>
 				      <form class="form" (submit)="onBid($event)">
 				      	<input 
 							type="integer" 
@@ -24,14 +24,14 @@
 						/>
 						<input type="submit" value="Submit" />
 				      </form>
-				    </div>  	
+				    </div>  	 -->
 			    </div>
 			  </div>
 	</div>
 </div>	
 
 
-
+<!-- 
 <table>
 	<thead>
 		<tr>
@@ -45,7 +45,7 @@
 			<td><ul><li *ngFor="let bid of item._bids">${{ bid.amt }} by {{ bid.bidder}} </li></ul></td>
 		</tr>	
 	</tbody>	
-</table>
+</table> -->
 
 
 <h2> Make Your Bid</h2>

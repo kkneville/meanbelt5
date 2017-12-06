@@ -33,7 +33,7 @@
 
 
 
-<h2>Please to be Logging In </h2>
+<h2>Please Login with your Name </h2>
 
 <form (submit)="onSubmit($event)">
 <p> Your Name: <input
@@ -44,7 +44,10 @@
 	[(ngModel)]="user.name"
 	#name="ngModel"
 	>
-	<span *ngIf="name.errors">Name of at least 2 characters is being mandatory</span>
+	<span *ngIf="name.errors">Name must be at least 2 characters long.</span>
 </p>
 <p><input type="submit" value="Login"></p>	
 </form>	
+
+
+<p> To see this app in action, please log in with your first name. To see admin functionality, log in under the name Katherine, to end and restart bidding. </p>
